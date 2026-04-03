@@ -3,3 +3,6 @@ pandas
 numpy
 plotly
 xlsxwriter
+fpdf2
+jinja2
+matplotlib
