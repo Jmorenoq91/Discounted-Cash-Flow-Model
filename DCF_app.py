@@ -534,14 +534,3 @@ st.sidebar.download_button(
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
-# PDF Download (requires fpdf library)
-try:
-    pdf_data = generate_pdf_report(df_projection, df_sens, fair_price)
-    st.sidebar.download_button(
-        label="Download PDF Summary",
-        data=pdf_data,
-        file_name="Valuation_Summary.pdf",
-        mime="application/pdf"
-    )
-except ImportError:
-    st.sidebar.warning("Install 'fpdf' to enable PDF downloads.")    
