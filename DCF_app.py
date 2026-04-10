@@ -475,39 +475,6 @@ def convert_df_to_excel(df_projection, df_growth, df_margins, df_sens, inputs_di
         
     return output.getvalue()
 
-def generate_pdf_report(df_projection, df_sens, fair_price):
-    from fpdf import FPDF
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", 'B', 16)
-    pdf.cell(200, 10, txt="DCF Valuation Report", ln=True, align='C')
-    
-    pdf.set_font("Arial", size=12)
-    pdf.ln(10)
-    pdf.cell(200, 10, txt=f"Fair Share Price: ${fair_price:,.2f}", ln=True)
-    
-    # Simple table export for PDF (Projections Summary)
-    pdf.ln(5)
-    pdf.set_font("Arial", 'B', 12)
-    pdf.cell(200, 10, txt="Financial Projections Summary (First 5 Years):", ln=True)
-    pdf.set_font("Arial", size=10)
-    
-    # Add headers
-    cols = ["Year"] + list(df_projection.columns[:4])
-    for col in cols:
-        pdf.cell(35, 10, col, border=1)
-    pdf.ln()
-    
-    # Add rows for first 5 years
-    for i in range(1, 6):
-        pdf.cell(35, 10, str(i), border=1)
-        pdf.cell(35, 10, f"{df_projection.loc[i, 'Revenue']:,.0f}", border=1)
-        pdf.cell(35, 10, f"{df_projection.loc[i, 'EBITDA']:,.0f}", border=1)
-        pdf.cell(35, 10, f"{df_projection.loc[i, 'EBIT']:,.0f}", border=1)
-        pdf.cell(35, 10, f"{df_projection.loc[i, 'FCFF']:,.0f}", border=1)
-        pdf.ln()
-        
-    return pdf.output(dest='S').encode('latin-1')
 
 # --- EXPORT SECTION ---
 st.sidebar.divider()
